@@ -24,7 +24,7 @@ export interface ValidationResult {
 export interface ValidationError {
   path: string
   message: string
-  value?: any
+  value?: unknown
 }
 
 export interface ValidationWarning {

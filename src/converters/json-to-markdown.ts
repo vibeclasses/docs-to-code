@@ -33,7 +33,7 @@ export class JsonToMarkdownConverter {
         const templateSource = readFileSync(templatePath, 'utf8')
         const template = Handlebars.compile(templateSource)
         this.templates.set(type as DocumentType, template)
-      } catch (error) {
+      } catch {
         console.warn(`Warning: Template not found for ${type}: ${filename}`)
       }
     }
@@ -43,9 +43,9 @@ export class JsonToMarkdownConverter {
     Handlebars.registerHelper(
       'ifEquals',
       function (
-        this: any,
-        arg1: any,
-        arg2: any,
+        this: unknown,
+        arg1: unknown,
+        arg2: unknown,
         options: Handlebars.HelperOptions,
       ) {
         return arg1 === arg2 ? options.fn(this) : options.inverse(this)
@@ -78,13 +78,13 @@ export class JsonToMarkdownConverter {
 
     Handlebars.registerHelper(
       'default',
-      function (value: any, defaultValue: any) {
+      function (value: unknown, defaultValue: unknown) {
         return value != null ? value : defaultValue
       },
     )
   }
 
-  convert(jsonData: any, options: ConversionOptions): string {
+  convert(jsonData: unknown, options: ConversionOptions): string {
     const template = this.templates.get(options.templateType)
     if (!template) {
       throw new Error(

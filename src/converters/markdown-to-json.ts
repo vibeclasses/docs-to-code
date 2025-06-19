@@ -8,7 +8,7 @@ import type {
 } from '@types'
 
 export class MarkdownToJsonConverter {
-  convert(markdownContent: string, documentType: DocumentType): any {
+  convert(markdownContent: string, documentType: DocumentType): unknown {
     const tokens = marked.lexer(markdownContent)
 
     switch (documentType) {
@@ -23,8 +23,8 @@ export class MarkdownToJsonConverter {
     }
   }
 
-  private extractMetadata(tokens: TokensList): Record<string, any> {
-    const metadata: Record<string, any> = {}
+  private extractMetadata(tokens: TokensList): Record<string, unknown> {
+    const metadata: Record<string, unknown> = {}
 
     // Find metadata section
     let inMetadataSection = false
@@ -38,8 +38,8 @@ export class MarkdownToJsonConverter {
       if (inMetadataSection && token.type === 'list') {
         for (const item of token.items) {
           const text = item.tokens
-            .filter((t: any) => t.type === 'text')
-            .map((t: any) => (t as Tokens.Text).text)
+            .filter((t: Tokens.Generic) => t.type === 'text')
+            .map((t: Tokens.Generic) => (t as Tokens.Text).text)
             .join(' ')
             .trim()
 
@@ -186,19 +186,19 @@ export class MarkdownToJsonConverter {
         const userStoryMatch = text.match(/User Story:\s*([\w-]+)/i)
         if (userStoryMatch) {
           // Use userStoryRef instead of userStoryId to match test expectations
-          ;(acceptanceCriteria as any).userStoryRef = userStoryMatch[1].trim()
+          ;(acceptanceCriteria as Record<string, unknown>).userStoryRef = userStoryMatch[1].trim()
           break
         }
       }
     }
 
     // If we didn't find the userStoryRef in a paragraph, try to extract it from the title
-    if (!(acceptanceCriteria as any).userStoryRef) {
+    if (!(acceptanceCriteria as Record<string, unknown>).userStoryRef) {
       for (const token of tokens) {
         if (token.type === 'heading' && token.depth === 1) {
           const titleMatch = token.text.match(/US-\d+/i)
           if (titleMatch) {
-            ;(acceptanceCriteria as any).userStoryRef = titleMatch[0].trim()
+            ;(acceptanceCriteria as Record<string, unknown>).userStoryRef = titleMatch[0].trim()
             break
           }
         }
@@ -254,7 +254,7 @@ export class MarkdownToJsonConverter {
           processingRequirements: [],
           outputRequirements: [],
         },
-      } as any),
+      } as Record<string, unknown>),
       // Keep detailedSpecifications for type compatibility
       detailedSpecifications: {
         inputRequirements: [],
@@ -290,7 +290,7 @@ export class MarkdownToJsonConverter {
         const userStoryMatch = text.match(/User Stor(?:y|ies):\s*([\w\s,-]+)/i)
         if (userStoryMatch) {
           // Use type assertion to handle the property that might not exist in the type
-          ;(functionalReq as any).userStoryRefs = userStoryMatch[1]
+          ;(functionalReq as Record<string, unknown>).userStoryRefs = userStoryMatch[1]
             .split(',')
             .map((ref: string) => ref.trim())
             .filter((ref: string) => ref.length > 0)
@@ -323,7 +323,7 @@ export class MarkdownToJsonConverter {
               functionalReq.detailedSpecifications!.inputRequirements =
                 inputReqs
               // Also set on requirements to match test expectations
-              ;(functionalReq as any).requirements.inputRequirements = inputReqs
+              ;(functionalReq as Record<string, unknown>).requirements.inputRequirements = inputReqs
             } else if (currentSubsection === 'processing-requirements') {
               const processingReqs = this.parseProcessingRequirements(
                 token as Tokens.List,
@@ -331,7 +331,7 @@ export class MarkdownToJsonConverter {
               functionalReq.detailedSpecifications!.processingRequirements =
                 processingReqs
               // Also set on requirements to match test expectations
-              ;(functionalReq as any).requirements.processingRequirements =
+              ;(functionalReq as Record<string, unknown>).requirements.processingRequirements =
                 processingReqs
             } else if (currentSubsection === 'output-requirements') {
               const outputReqs = this.parseOutputRequirements(
@@ -340,7 +340,7 @@ export class MarkdownToJsonConverter {
               functionalReq.detailedSpecifications!.outputRequirements =
                 outputReqs
               // Also set on requirements to match test expectations
-              ;(functionalReq as any).requirements.outputRequirements =
+              ;(functionalReq as Record<string, unknown>).requirements.outputRequirements =
                 outputReqs
             }
           } else if (currentSection === 'acceptance-criteria') {
@@ -376,7 +376,7 @@ export class MarkdownToJsonConverter {
     return null
   }
 
-  private parseGivenWhenThen(text: string, scenario: any): void {
+  private parseGivenWhenThen(text: string, scenario: Record<string, unknown>): void {
     const givenMatch = text.match(
       /\*\*Given\*\*\s+(.+?)(?=\s+\*\*When\*\*|\s+\*\*Then\*\*|$)/i,
     )
@@ -396,14 +396,14 @@ export class MarkdownToJsonConverter {
     }
   }
 
-  private parseAcceptanceCriteriaSection(token: Tokens.List): any {
+  private parseAcceptanceCriteriaSection(token: Tokens.List): Record<string, unknown> | null {
     // Extract the first item as the criteria title
     if (token.items.length === 0) return null
 
     const firstItem = token.items[0]
     const titleText = firstItem.tokens
-      .filter((t: any) => t.type === 'text')
-      .map((t: any) => (t as Tokens.Text).text)
+      .filter((t: Tokens.Generic) => t.type === 'text')
+      .map((t: Tokens.Generic) => (t as Tokens.Text).text)
       .join(' ')
       .trim()
 
@@ -429,8 +429,8 @@ export class MarkdownToJsonConverter {
     const fullText = token.items
       .map((item) => {
         return item.tokens
-          .filter((t: any) => t.type === 'text')
-          .map((t: any) => (t as Tokens.Text).text)
+          .filter((t: Tokens.Generic) => t.type === 'text')
+          .map((t: Tokens.Generic) => (t as Tokens.Text).text)
           .join(' ')
           .trim()
       })
@@ -469,14 +469,14 @@ export class MarkdownToJsonConverter {
 
     for (const item of token.items) {
       const text = item.tokens
-        .filter((t: any) => t.type === 'text')
-        .map((t: any) => (t as Tokens.Text).text)
+        .filter((t: Tokens.Generic) => t.type === 'text')
+        .map((t: Tokens.Generic) => (t as Tokens.Text).text)
         .join(' ')
         .trim()
 
       // Parse the format: "Element: value | DataType: value | Format: value | Validation: value | Source: value"
       const parts = text.split('|').map((part) => part.trim())
-      const requirement: any = {
+      const requirement: Record<string, string> = {
         element: '',
         dataType: '',
         format: '',
@@ -520,7 +520,7 @@ export class MarkdownToJsonConverter {
 
       // Parse the format: "Step: value | Description: value | Conditions: value"
       const parts = text.split('|').map((part) => part.trim())
-      const requirement: any = {
+      const requirement: Record<string, string> = {
         step: '',
         description: '',
       }
@@ -552,8 +552,8 @@ export class MarkdownToJsonConverter {
     const fullText = token.items
       .map((item) => {
         return item.tokens
-          .filter((t: any) => t.type === 'text')
-          .map((t: any) => (t as Tokens.Text).text)
+          .filter((t: Tokens.Generic) => t.type === 'text')
+          .map((t: Tokens.Generic) => (t as Tokens.Text).text)
           .join(' ')
           .trim()
       })
@@ -592,14 +592,14 @@ export class MarkdownToJsonConverter {
 
     for (const item of token.items) {
       const text = item.tokens
-        .filter((t: any) => t.type === 'text')
-        .map((t: any) => (t as Tokens.Text).text)
+        .filter((t: Tokens.Generic) => t.type === 'text')
+        .map((t: Tokens.Generic) => (t as Tokens.Text).text)
         .join(' ')
         .trim()
 
       // Parse the format: "Element: value | DataType: value | Format: value | Destination: value | Timing: value"
       const parts = text.split('|').map((part) => part.trim())
-      const requirement: any = {
+      const requirement: Record<string, string> = {
         element: '',
         dataType: '',
         format: '',
@@ -638,14 +638,14 @@ export class MarkdownToJsonConverter {
   private extractListItems(token: Tokens.List): string[] {
     return token.items.map((item) =>
       item.tokens
-        .filter((t: any) => t.type === 'text')
-        .map((t: any) => (t as Tokens.Text).text)
+        .filter((t: Tokens.Generic) => t.type === 'text')
+        .map((t: Tokens.Generic) => (t as Tokens.Text).text)
         .join(' ')
         .trim(),
     )
   }
 
-  private parseScenarioHeading(text: string): any {
+  private parseScenarioHeading(text: string): Record<string, unknown> | null {
     const scenarioMatch = text.match(
       /Scenario\s+(\d+):\s+(.+?)(?:\s+\((.+?)\s+Priority\))?/i,
     )
