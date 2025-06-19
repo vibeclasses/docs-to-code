@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDirs": ["./src", "./tests"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@types": ["./src/types/index.js"],
+      "@types/*": ["./src/types/*"],
+      "@schemas": ["./src/schemas/index.js"],
+      "@schemas/*": ["./src/schemas/*"],
+      "@templates/*": ["./src/templates/*"],
+      "@converters": ["./src/converters/index.js"],
+      "@converters/*": ["./src/converters/*"],
+      "@parsers/*": ["./src/parsers/*"],
+      "@generators/*": ["./src/generators/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"],
+  "ts-node": {
+    "esm": true
+  }
+}

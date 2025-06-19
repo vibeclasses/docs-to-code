@@ -1,0 +1,140 @@
+# Acceptance Criteria for
+{{title}}
+
+**Related User Story**: [{{userStoryId}}](../features/{{userStoryId}}.md) ##
+Scenarios
+
+{{#each scenarios}}
+  ### Scenario
+  {{@index}}:
+  {{title}}{{#if priority}} ({{priority}} Priority){{/if}}
+  **Type**:
+  {{upper type}}
+
+  **Given**
+  {{given}}
+  **When**
+  {{when}}
+  **Then**
+  {{then}}
+  {{#if and}}
+    {{#each and}}
+      **And**
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+{{/each}}
+
+{{#if crossScenarioRequirements}}
+  ## Cross-Scenario Requirements
+
+  {{#if crossScenarioRequirements.performance}}
+    ### Performance Requirements
+    {{#each crossScenarioRequirements.performance}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+  {{#if crossScenarioRequirements.accessibility}}
+    ### Accessibility Requirements
+    {{#each crossScenarioRequirements.accessibility}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+  {{#if crossScenarioRequirements.responsive}}
+    ### Responsive Design Requirements
+    {{#each crossScenarioRequirements.responsive}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+  {{#if crossScenarioRequirements.browserSupport}}
+    ### Browser Support Requirements
+    {{#each crossScenarioRequirements.browserSupport}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+  {{#if crossScenarioRequirements.security}}
+    ### Security Requirements
+    {{#each crossScenarioRequirements.security}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+{{/if}}
+
+{{#if dataValidationRules}}
+  ## Data Validation Rules
+
+  {{#each dataValidationRules}}
+    ###
+    {{field}}
+    **Validation Rules:**
+    {{#each rules}}
+      -
+      {{this}}
+    {{/each}}
+    {{#if errorMessages}}
+      **Error Messages:**
+      {{#each errorMessages}}
+        -
+        {{this}}
+      {{/each}}
+    {{/if}}
+
+  {{/each}}
+{{/if}}
+
+{{#if integrationRequirements}}
+  ## Integration Requirements
+
+  {{#if integrationRequirements.externalAPIs}}
+    ### External API Requirements
+    {{#each integrationRequirements.externalAPIs}}
+      **{{api}}** - API Calls:
+      {{join calls ', '}}
+      - Expected Responses:
+      {{join expectedResponses ', '}}
+
+    {{/each}}
+  {{/if}}
+
+  {{#if integrationRequirements.database}}
+    ### Database Requirements
+    {{#each integrationRequirements.database}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+  {{#if integrationRequirements.notifications}}
+    ### Notification Requirements
+    {{#each integrationRequirements.notifications}}
+      - **Trigger**:
+      {{trigger}}
+      - **Recipients**:
+      {{join recipients ', '}}
+      - **Method**:
+      {{method}}
+
+    {{/each}}
+  {{/if}}
+{{/if}}
+
+{{#if metadata}}
+  --- **Metadata** Created by:
+  {{metadata.createdBy}}
+  on
+  {{formatDate metadata.createdDate}}
+  {{#if metadata.lastModified}}Last modified: {{metadata.lastModified}}{{/if}}
+  {{#if metadata.version}}Version: {{metadata.version}}{{/if}}
+  {{#if metadata.reviewedBy}}Reviewed by:
+    {{join metadata.reviewedBy ', '}}{{/if}}
+{{/if}}

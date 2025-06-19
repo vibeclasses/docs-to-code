@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+import { register } from 'tsx/esm'
+register()
+import('../src/cli.ts')

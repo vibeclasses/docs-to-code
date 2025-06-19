@@ -1,0 +1,217 @@
+# Functional Requirement:
+{{title}}
+
+## Requirement Identification - **Requirement ID**:
+{{id}}
+{{#if requirementStatement.relatedEpic}}
+  - **Related Epic**:
+  {{requirementStatement.relatedEpic}}
+{{/if}}
+{{#if requirementStatement.userStoryLink}}
+  - **User Story Link**: [{{requirementStatement.userStoryLink}}](../features/{{requirementStatement.userStoryLink}}.md)
+{{/if}}
+- **Priority**:
+{{requirementStatement.priority}}
+- **Complexity**:
+{{requirementStatement.complexity}}
+
+## Requirement Statement ### Primary Statement (User Story Format) **As a**
+{{requirementStatement.userStoryFormat.userType}}
+**I want**
+{{requirementStatement.userStoryFormat.capability}}
+**So that**
+{{requirementStatement.userStoryFormat.benefit}}
+
+### Functional Description
+{{requirementStatement.functionalDescription}}
+
+## Detailed Specifications ### Input Requirements | Input Element | Data Type |
+Format | Validation Rules | Source |
+|---------------|-----------|---------|------------------|---------|
+{{#each detailedSpecifications.inputRequirements}}
+  |
+  {{element}}
+  |
+  {{dataType}}
+  |
+  {{format}}
+  |
+  {{validationRules}}
+  |
+  {{source}}
+  |
+{{/each}}
+
+### Processing Requirements
+{{#each detailedSpecifications.processingRequirements}}
+  {{increment @index}}. **{{step}}**:
+  {{description}}{{#if conditions}} ({{conditions}}){{/if}}
+{{/each}}
+
+### Output Requirements | Output Element | Data Type | Format | Destination |
+Timing | |----------------|-----------|---------|-------------|---------|
+{{#each detailedSpecifications.outputRequirements}}
+  |
+  {{element}}
+  |
+  {{dataType}}
+  |
+  {{format}}
+  |
+  {{destination}}
+  |
+  {{timing}}
+  |
+{{/each}}
+
+{{#if businessRules}}
+  ## Business Rules and Constraints
+
+  {{#if businessRules.businessLogicRules}}
+    ### Business Logic Rules
+    {{#each businessRules.businessLogicRules}}
+      - **{{category}}**:
+      {{rule}}
+    {{/each}}
+  {{/if}}
+
+  {{#if businessRules.dataConstraints}}
+    ### Data Constraints
+    {{#each businessRules.dataConstraints}}
+      - **{{dataElement}}**:
+      {{constraints}}
+    {{/each}}
+  {{/if}}
+
+  {{#if businessRules.workflowRules}}
+    ### Workflow Rules
+    {{#each businessRules.workflowRules}}
+      - **{{processStep}}**:
+      {{requirements}}
+    {{/each}}
+  {{/if}}
+{{/if}}
+
+{{#if examples}}
+  ## Examples and Use Cases
+
+  {{#each examples}}
+    ###
+    {{title}}
+    **Input**:
+    {{input}}
+    **Processing**:
+    {{processing}}
+    **Output**:
+    {{output}}
+
+  {{/each}}
+{{/if}}
+
+## Acceptance Criteria (Given/When/Then)
+
+{{#each acceptanceCriteria}}
+  ###
+  {{flow}}
+  **Given**
+  {{given}}
+  **When**
+  {{when}}
+  **Then**
+  {{then}}
+  {{#if and}}
+    {{#each and}}
+      **And**
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+{{/each}}
+
+{{#if traceabilityLinks}}
+  ## Traceability Links
+
+  {{#if traceabilityLinks.upstream}}
+    ### Upstream Traceability (What drives this requirement)
+    {{#each traceabilityLinks.upstream}}
+      - **{{type}}**:
+      {{id}}
+      -
+      {{description}}
+    {{/each}}
+  {{/if}}
+
+  {{#if traceabilityLinks.downstream}}
+    ### Downstream Traceability (What this requirement drives)
+    {{#each traceabilityLinks.downstream}}
+      - **{{type}}**:
+      {{id}}
+      -
+      {{description}}
+    {{/each}}
+  {{/if}}
+
+  {{#if traceabilityLinks.related}}
+    ### Related Requirements
+    {{#each traceabilityLinks.related}}
+      - **{{type}}**:
+      {{id}}
+      -
+      {{relationship}}
+    {{/each}}
+  {{/if}}
+{{/if}}
+
+{{#if nonFunctionalConsiderations}}
+  ## Non-Functional Considerations
+  {{#if nonFunctionalConsiderations.performance}}
+    - **Performance**:
+    {{nonFunctionalConsiderations.performance}}
+  {{/if}}
+  {{#if nonFunctionalConsiderations.security}}
+    - **Security**:
+    {{nonFunctionalConsiderations.security}}
+  {{/if}}
+  {{#if nonFunctionalConsiderations.usability}}
+    - **Usability**:
+    {{nonFunctionalConsiderations.usability}}
+  {{/if}}
+  {{#if nonFunctionalConsiderations.reliability}}
+    - **Reliability**:
+    {{nonFunctionalConsiderations.reliability}}
+  {{/if}}
+{{/if}}
+
+{{#if verificationCriteria}}
+  ## Verification Criteria
+  {{#each verificationCriteria}}
+    - [{{#if completed}}x{{else}} {{/if}}] **{{type}}**:
+    {{criteria}}
+  {{/each}}
+{{/if}}
+
+{{#if changeHistory}}
+  ## Change History | Date | Version | Change Description | Changed By |
+  |------|---------|-------------------|------------|
+  {{#each changeHistory}}
+    |
+    {{formatDate date}}
+    |
+    {{version}}
+    |
+    {{description}}
+    |
+    {{changedBy}}
+    |
+  {{/each}}
+{{/if}}
+
+{{#if metadata}}
+  --- **Metadata** Created by:
+  {{metadata.createdBy}}
+  on
+  {{formatDate metadata.createdDate}}
+  {{#if metadata.lastModified}}Last modified: {{metadata.lastModified}}{{/if}}
+  {{#if metadata.version}}Version: {{metadata.version}}{{/if}}
+  {{#if metadata.status}}Status: {{metadata.status}}{{/if}}
+{{/if}}

@@ -1,0 +1,134 @@
+# User Story:
+{{title}}
+
+## Story Statement **As a**
+{{storyStatement.userType}}
+**I want**
+{{storyStatement.goal}}
+**So that**
+{{storyStatement.reason}}
+
+## Story Details - **Story ID**:
+{{id}}
+- **Epic**:
+{{storyDetails.epic}}
+- **Priority**:
+{{storyDetails.priority}}
+- **Story Points**:
+{{storyDetails.storyPoints}}
+{{#if storyDetails.sprint}}
+  - **Sprint**:
+  {{storyDetails.sprint}}
+{{/if}}
+
+## User Context - **Primary Persona**:
+{{userContext.primaryPersona}}
+- **User Journey Stage**:
+{{userContext.userJourneyStage}}
+- **Frequency of Use**:
+{{userContext.frequencyOfUse}}
+- **User's Technical Skill Level**:
+{{userContext.technicalSkillLevel}}
+
+## Detailed Requirements ### What the user needs to accomplish:
+{{#each detailedRequirements.userNeeds}}
+  -
+  {{this}}
+{{/each}}
+
+### Success Criteria:
+{{#each detailedRequirements.successCriteria}}
+  -
+  {{this}}
+{{/each}}
+
+{{#if businessValue}}
+  ## Business Value
+  {{#if businessValue.revenueImpact}}
+    - **Revenue Impact**:
+    {{businessValue.revenueImpact}}
+  {{/if}}
+  {{#if businessValue.userExperienceImprovement}}
+    - **User Experience Improvement**:
+    {{businessValue.userExperienceImprovement}}
+  {{/if}}
+  {{#if businessValue.operationalEfficiency}}
+    - **Operational Efficiency**:
+    {{businessValue.operationalEfficiency}}
+  {{/if}}
+  {{#if businessValue.strategicAlignment}}
+    - **Strategic Alignment**:
+    {{businessValue.strategicAlignment}}
+  {{/if}}
+{{/if}}
+
+{{#if dependencies}}
+  ## Dependencies
+  {{#if dependencies.technical}}
+    ### Technical Dependencies:
+    {{#each dependencies.technical}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+  {{#if dependencies.content}}
+    ### Content Dependencies:
+    {{#each dependencies.content}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+  {{#if dependencies.team}}
+    ### Team Dependencies:
+    {{#each dependencies.team}}
+      -
+      {{this}}
+    {{/each}}
+  {{/if}}
+{{/if}}
+
+{{#if definitionOfReady}}
+  ## Definition of Ready Checklist
+  {{#each definitionOfReady}}
+    - [{{#if completed}}x{{else}} {{/if}}]
+    {{item}}
+  {{/each}}
+{{/if}}
+
+## Acceptance Criteria
+
+{{#each acceptanceCriteria}}
+  ###
+  {{scenario}}
+  **Given**
+  {{given}}
+  **When**
+  {{when}}
+  **Then**
+  {{then}}
+  {{#if and}}
+    {{#each and}}
+      **And**
+      {{this}}
+    {{/each}}
+  {{/if}}
+
+{{/each}}
+
+{{#if notes}}
+  ## Notes and Assumptions
+  {{#each notes}}
+    -
+    {{this}}
+  {{/each}}
+{{/if}}
+
+{{#if metadata}}
+  --- **Metadata** Created by:
+  {{metadata.createdBy}}
+  on
+  {{metadata.createdDate}}
+  {{#if metadata.lastModified}}Last modified: {{metadata.lastModified}}{{/if}}
+  {{#if metadata.version}}Version: {{metadata.version}}{{/if}}
+  {{#if metadata.status}}Status: {{metadata.status}}{{/if}}
+{{/if}}

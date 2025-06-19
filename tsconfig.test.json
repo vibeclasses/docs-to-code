@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "paths": {
+      "@converters": ["./src/converters"],
+      "@converters/*": ["./src/converters/*"],
+      "@schemas": ["./src/schemas"],
+      "@schemas/*": ["./src/schemas/*"],
+      "@types": ["./src/types"],
+      "@types/*": ["./src/types/*"],
+      "@generators/*": ["./src/generators/*"]
+    }
+  },
+  "include": ["src/**/*", "tests/**/*"]
+}
