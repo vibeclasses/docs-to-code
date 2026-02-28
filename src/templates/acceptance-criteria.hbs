@@ -1,28 +1,21 @@
-# Acceptance Criteria for
-{{title}}
+# {{title}}
 
-**Related User Story**: [{{userStoryId}}](../features/{{userStoryId}}.md) ##
-Scenarios
+User Story: {{userStoryRef}}
+
+## Scenarios
 
 {{#each scenarios}}
-  ### Scenario
-  {{@index}}:
-  {{title}}{{#if priority}} ({{priority}} Priority){{/if}}
-  **Type**:
-  {{upper type}}
+## Scenario: {{title}}{{#if priority}} ({{priority}} Priority){{/if}}
+{{#if type}}**Type**: {{upper type}}{{/if}}
 
-  **Given**
-  {{given}}
-  **When**
-  {{when}}
-  **Then**
-  {{then}}
-  {{#if and}}
-    {{#each and}}
-      **And**
-      {{this}}
-    {{/each}}
-  {{/if}}
+**Given** {{given}}
+**When** {{when}}
+**Then** {{then}}
+{{#if and}}
+{{#each and}}
+**And** {{this}}
+{{/each}}
+{{/if}}
 
 {{/each}}
 
@@ -129,12 +122,11 @@ Scenarios
 {{/if}}
 
 {{#if metadata}}
-  --- **Metadata** Created by:
-  {{metadata.createdBy}}
-  on
-  {{formatDate metadata.createdDate}}
-  {{#if metadata.lastModified}}Last modified: {{metadata.lastModified}}{{/if}}
-  {{#if metadata.version}}Version: {{metadata.version}}{{/if}}
-  {{#if metadata.reviewedBy}}Reviewed by:
-    {{join metadata.reviewedBy ', '}}{{/if}}
+## Metadata
+- **Created By**: {{metadata.createdBy}}
+- **Created Date**: {{metadata.createdDate}}
+{{#if metadata.lastModified}}- **Last Modified**: {{metadata.lastModified}}{{/if}}
+{{#if metadata.version}}- **Version**: {{metadata.version}}{{/if}}
+{{#if metadata.status}}- **Status**: {{metadata.status}}{{/if}}
+{{#if metadata.reviewedBy}}- **Reviewed By**: {{join metadata.reviewedBy ', '}}{{/if}}
 {{/if}}

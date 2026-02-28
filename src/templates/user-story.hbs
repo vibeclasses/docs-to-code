@@ -1,24 +1,15 @@
-# User Story:
-{{title}}
+# {{title}}
 
-## Story Statement **As a**
-{{storyStatement.userType}}
-**I want**
-{{storyStatement.goal}}
-**So that**
-{{storyStatement.reason}}
+## Story Statement
+**As a** {{storyStatement.userType}}, **I want** {{storyStatement.goal}} **so that** {{storyStatement.reason}}.
 
-## Story Details - **Story ID**:
-{{id}}
-- **Epic**:
-{{storyDetails.epic}}
-- **Priority**:
-{{storyDetails.priority}}
-- **Story Points**:
-{{storyDetails.storyPoints}}
+## Story Details
+- **Story ID**: {{id}}
+- **Epic**: {{storyDetails.epic}}
+- **Priority**: {{storyDetails.priority}}
+- **Story Points**: {{storyDetails.storyPoints}}
 {{#if storyDetails.sprint}}
-  - **Sprint**:
-  {{storyDetails.sprint}}
+- **Sprint**: {{storyDetails.sprint}}
 {{/if}}
 
 ## User Context - **Primary Persona**:
@@ -124,11 +115,10 @@
 {{/if}}
 
 {{#if metadata}}
-  --- **Metadata** Created by:
-  {{metadata.createdBy}}
-  on
-  {{metadata.createdDate}}
-  {{#if metadata.lastModified}}Last modified: {{metadata.lastModified}}{{/if}}
-  {{#if metadata.version}}Version: {{metadata.version}}{{/if}}
-  {{#if metadata.status}}Status: {{metadata.status}}{{/if}}
+## Metadata
+- **Created By**: {{metadata.createdBy}}
+- **Created Date**: {{metadata.createdDate}}
+{{#if metadata.lastModified}}- **Last Modified**: {{metadata.lastModified}}{{/if}}
+{{#if metadata.version}}- **Version**: {{metadata.version}}{{/if}}
+{{#if metadata.status}}- **Status**: {{metadata.status}}{{/if}}
 {{/if}}

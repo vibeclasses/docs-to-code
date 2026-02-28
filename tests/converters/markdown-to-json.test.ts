@@ -32,7 +32,7 @@ describe('MarkdownToJsonConverter', () => {
       assert.strictEqual(json.title, 'User Login Feature', 'Title should be extracted correctly');
       assert.strictEqual(json.storyStatement.userType, 'Registered User', 'User type should be extracted correctly');
       assert.strictEqual(json.storyStatement.goal, 'log into the application', 'Goal should be extracted correctly');
-      assert.strictEqual(json.storyStatement.reason, 'access my personalized dashboard', 'Reason should be extracted correctly');
+      assert.strictEqual(json.storyStatement.reason, 'I can access my personalized dashboard', 'Reason should be extracted correctly');
       assert.strictEqual(json.storyDetails.epic, 'User Authentication', 'Epic should be extracted correctly');
       assert.strictEqual(json.storyDetails.priority, 'High', 'Priority should be extracted correctly');
       assert.strictEqual(json.storyDetails.storyPoints, 5, 'Story points should be extracted correctly');

@@ -39,23 +39,23 @@ describe("JsonToMarkdownConverter", () => {
         "Title should be in markdown"
       );
       assert.ok(
-        markdown.includes("As a Registered User"),
+        markdown.includes("**As a** Registered User"),
         "User story format should be present"
       );
       assert.ok(
-        markdown.includes("Epic: User Authentication"),
+        markdown.includes("**Epic**: User Authentication"),
         "Epic should be in markdown"
       );
       assert.ok(
-        markdown.includes("Priority: High"),
+        markdown.includes("**Priority**: High"),
         "Priority should be in markdown"
       );
       assert.ok(
-        markdown.includes("Story Points: 5"),
+        markdown.includes("**Story Points**: 5"),
         "Story points should be in markdown"
       );
       assert.ok(
-        markdown.includes("Created By: product.owner@company.com"),
+        markdown.includes("**Created By**: product.owner@company.com"),
         "Metadata should be in markdown"
       );
     });
@@ -173,7 +173,7 @@ describe("JsonToMarkdownConverter", () => {
         "Title should be in markdown"
       );
       assert.ok(
-        markdown.includes("User Stories: US-001"),
+        markdown.includes("**User Stories**: US-001"),
         "User story references should be in markdown"
       );
       assert.ok(
@@ -205,7 +205,7 @@ describe("JsonToMarkdownConverter", () => {
         assert.fail("Should have thrown an error for invalid document type");
       } catch (error: any) {
         assert.ok(
-          error.message.includes("No template found"),
+          error.message.includes("Template not found"),
           "Error message should indicate missing template"
         );
       }

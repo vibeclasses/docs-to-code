@@ -84,7 +84,7 @@ export class JsonToMarkdownConverter {
     )
   }
 
-  convert(jsonData: any, options: ConversionOptions): string {
+  async convert(jsonData: any, options: ConversionOptions): Promise<string> {
     const template = this.templates.get(options.templateType)
     if (!template) {
       throw new Error(
