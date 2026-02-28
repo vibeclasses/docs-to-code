@@ -178,7 +178,7 @@ docs-to-code build
     documentTypes: DocumentType[],
   ): Promise<void> {
     // Define examples with proper type annotation
-    const examples: Partial<Record<DocumentType, any>> = {
+    const examples: Partial<Record<DocumentType, unknown>> = {
       'user-story': {
         id: 'US-001',
         title: 'User Login Feature',

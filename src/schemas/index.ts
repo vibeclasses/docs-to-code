@@ -1,13 +1,13 @@
-import Ajv from 'ajv'
+import Ajv, { ValidateFunction } from 'ajv'
 import * as ajvFormats from 'ajv-formats'
 import { userStorySchema } from './user-story.schema.js'
 import { acceptanceCriteriaSchema } from './acceptance-criteria.schema.js'
 import { functionalRequirementsSchema } from './functional-requirements.schema.js'
-import type { DocumentType, ValidationResult } from '../types/index.js'
+import type { DocumentType, ValidationResult, ValidationError, ValidationWarning } from '../types/index.js'
 
 export class SchemaValidator {
-  private ajv: any // Using any to avoid type issues with AJV in Node.js 22
-  private schemas: Map<DocumentType, any>
+  private ajv: Ajv
+  private schemas: Map<DocumentType, ValidateFunction>
 
   constructor() {
     // Create a new Ajv instance with proper configuration
@@ -36,7 +36,7 @@ export class SchemaValidator {
     )
   }
 
-  validate(data: any, documentType: DocumentType): ValidationResult {
+  validate(data: unknown, documentType: DocumentType): ValidationResult {
     const validator = this.schemas.get(documentType)
     if (!validator) {
       return {
@@ -59,9 +59,9 @@ export class SchemaValidator {
       )
     }
 
-    const errors =
-      validator.errors?.map((error: any) => ({
-        path: error.instancePath || error.schemaPath,
+    const errors: ValidationError[] =
+      validator.errors?.map((error) => ({
+        path: error.instancePath || error.schemaPath || '',
         message: error.message || 'Validation error',
         value: error.data,
       })) || []
@@ -75,8 +75,8 @@ export class SchemaValidator {
     }
   }
 
-  private generateWarnings(data: any, documentType: DocumentType): any[] {
-    const warnings: any[] = []
+  private generateWarnings(data: unknown, documentType: DocumentType): ValidationWarning[] {
+    const warnings: ValidationWarning[] = []
 
     // Add business logic warnings
     if (documentType === 'user-story') {
